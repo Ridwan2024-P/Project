@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Judge Evaluation Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h2>Computer Science Project Evaluation</h2>
+  </header>
+
+  <main class="container">
+    <form class="evaluation-form">
+      <div class="project-info">
+        <label>Group Members:</label>
+        <input type="text" placeholder="Enter group members">
+
+        <label>Group Number:</label>
+        <input type="text" placeholder="Enter group number">
+
+        <label>Project Title:</label>
+        <input type="text" placeholder="Enter project title">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th>Developing (0–10)</th>
+            <th>Accomplished (11–15)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Articulate requirements</td>
+            <td><input type="number" min="0" max="10"></td>
+            <td><input type="number" min="11" max="15"></td>
+          </tr>
+          <tr>
+            <td>Choose appropriate tools and methods</td>
+            <td><input type="number" min="0" max="10"></td>
+            <td><input type="number" min="11" max="15"></td>
+          </tr>
+          <tr>
+            <td>Give clear and coherent presentation</td>
+            <td><input type="number" min="0" max="10"></td>
+            <td><input type="number" min="11" max="15"></td>
+          </tr>
+          <tr>
+            <td>Functioned well as a team</td>
+            <td><input type="number" min="0" max="10"></td>
+            <td><input type="number" min="11" max="15"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="extra-section">
+        <label>Total:</label>
+        <input type="text" placeholder="Auto calculated">
+
+        <label>Judge’s Name:</label>
+        <input type="text" placeholder="Enter your name">
+
+        <label>Comments:</label>
+        <textarea placeholder="Write comments..."></textarea>
+
+        <button type="submit">Submit Grades</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>Judge Evaluation Form © 2025</p>
+  </footer>
+</body>
+</html>
+<style>/* General Layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #002b5c;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: white;
+  padding: 20px 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h3 {
+  text-align: center;
+  color: #002b5c;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #e5ecf5;
+}
+
+/* Forms */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  background-color: #002b5c;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #004b9a;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+}
+
+.summary {
+  margin-top: 20px;
+  text-align: right;
+  font-weight: bold;
+}
+</style>

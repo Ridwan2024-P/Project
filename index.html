@@ -3,26 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
   <link rel="stylesheet" href="style.css">
-  <title>Login Page</title>
 </head>
-<body >
- 
-  <div id ="form">
-    
-  <form action="" method="Get" >
-     <h2 style="text-align: center; color: #00074f; font-family: Arial, sans-serif;"> Welcome to the Login Page</h2>
-   
-    <input type="email" name="email" id="email" placeholder="Enter Your Email">
-    <br>  
-    <input type="password" name="password" id="password" placeholder="Enter Your Password">
-    <br>
-    
-    <input type="radio" id="admin" name="type" value="admin"> Admin
-    <input type="radio" id="Judge" name="type" value="Judge"> Judge
-    <br>
-    <input type="submit" id="btn" value="Login">
-  </form>
-  </div>
+<body>
+  <header class="header">
+    <h2>Admin Dashboard</h2>
+  </header>
+
+  <main class="container">
+    <section class="table-section">
+      <h3>Judges' Submitted Scores</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Judge Name</th>
+            <th>Group Number</th>
+            <th>Total Score</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Judge 1</td>
+            <td>1</td>
+            <td>52</td>
+            <td>Excellent teamwork</td>
+          </tr>
+          <tr>
+            <td>Judge 2</td>
+            <td>1</td>
+            <td>48</td>
+            <td>Good effort</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="summary">
+        <p><strong>Group Average:</strong> 50</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Admin Panel © 2025</p>
+  </footer>
 </body>
 </html>
