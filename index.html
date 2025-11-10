@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Login Page</title>
 </head>
 <body >
-  <h1 style="text-align: center;"> Welcome to the Login Page</h1>
-  <div style="text-align: center;">
+ 
+  <div id ="form">
     
-  <form action="" method="Get" style="text-align: left;">
-    Email:<br>
-    <input type="email" name="email" placeholder="Enter Your Email">
+  <form action="" method="Get" >
+     <h2 style="text-align: center; color: #00074f; font-family: Arial, sans-serif;"> Welcome to the Login Page</h2>
+   
+    <input type="email" name="email" id="email" placeholder="Enter Your Email">
+    <br>  
+    <input type="password" name="password" id="password" placeholder="Enter Your Password">
     <br>
-    Password:<br>
-    <input type="password" name="password" placeholder="Enter Your Password">
+    
+    <input type="radio" id="admin" name="type" value="admin"> Admin
+    <input type="radio" id="Judge" name="type" value="Judge"> Judge
     <br>
-    Type:<br>
-    <input type="radio" name="type" value="admin"> Admin
-    <input type="radio" name="type" value="Judge"> Judge
-    <br>
-    <input type="submit" value="Login">
+    <input type="submit" id="btn" value="Login">
   </form>
   </div>
 </body>
