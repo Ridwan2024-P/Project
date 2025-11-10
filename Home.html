@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Scores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #002b5c;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 25px 35px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      color: #002b5c;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #e5ecf5;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f7ff;
+    }
+
+    .summary {
+      margin-top: 20px;
+      text-align: right;
+      font-weight: bold;
+      font-size: 16px;
+      color: #002b5c;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 30px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+      border-top: 1px solid #ddd;
+    }
+
+    @media screen and (max-width: 600px) {
+      th, td {
+        font-size: 12px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h2>Project Scores</h2>
+  </header>
+
+  <main class="container">
+    <h3>Judges' Submitted Scores</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Judge Name</th>
+          <th>Group Number</th>
+          <th>Total Score</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Judge 1</td>
+          <td>1</td>
+          <td>52</td>
+          <td>Excellent teamwork</td>
+        </tr>
+        <tr>
+          <td>Judge 2</td>
+          <td>1</td>
+          <td>48</td>
+          <td>Good effort</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <p><strong>Group Average:</strong> 50</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Project Scores © 2025</p>
+  </footer>
+
+</body>
+</html>

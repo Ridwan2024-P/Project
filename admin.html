@@ -5,13 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* General Layout */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #002b5c;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h3 {
+      text-align: left;
+      color: #002b5c;
+      margin-bottom: 10px;
+    }
+
+    .form-section {
+      margin-bottom: 40px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      background-color: #002b5c;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #004b9a;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e5ecf5;
+    }
+
+    .summary {
+      margin-top: 20px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
+
   <header class="header">
     <h2>Admin Dashboard</h2>
   </header>
 
   <main class="container">
+
+    <!-- Create Judge Section -->
+    <section class="form-section">
+      <h3>Add New Judge</h3>
+      <form id="judgeForm">
+        <input type="text" name="judgeName" placeholder="Judge Name" required>
+        <input type="email" name="judgeEmail" placeholder="Judge Email" required>
+         <input type="password" name="judgePassword" placeholder="Judge Password" required>
+        <button type="submit">Add Judge</button>
+      </form>
+    </section>
+
+    <!-- Create Project Section -->
+    <section class="form-section">
+      <h3>Create New Project</h3>
+      <form id="projectForm">
+        <input type="text" name="projectTitle" placeholder="Project Title" required>
+        <input type="number" name="groupNumber" placeholder="Group Number" required>
+        <textarea name="groupMembers" placeholder="Enter group members separated by commas" required></textarea>
+        <button type="submit">Create Project</button>
+      </form>
+    </section>
+
+    <!-- Judges Scores Table -->
     <section class="table-section">
       <h3>Judges' Submitted Scores</h3>
       <table>
@@ -23,7 +149,7 @@
             <th>Comments</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="scoresTable">
           <tr>
             <td>Judge 1</td>
             <td>1</td>
@@ -43,106 +169,33 @@
         <p><strong>Group Average:</strong> 50</p>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <p>Admin Panel © 2025</p>
   </footer>
+
+  <script>
+    // Handle Judge Form Submission
+    document.getElementById('judgeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.judgeName.value;
+      const email = this.judgeEmail.value;
+      alert(`Judge Added: ${name} (${email})`);
+      this.reset();
+    });
+
+    // Handle Project Form Submission
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = this.projectTitle.value;
+      const group = this.groupNumber.value;
+      const members = this.groupMembers.value;
+      alert(`Project Created:\nTitle: ${title}\nGroup: ${group}\nMembers: ${members}`);
+      this.reset();
+    });
+  </script>
+
 </body>
 </html>
-
-<style>/* General Layout */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
-  margin: 0;
-  padding: 0;
-}
-
-.header {
-  background-color: #002b5c;
-  color: white;
-  padding: 15px 0;
-  text-align: center;
-}
-
-.container {
-  width: 90%;
-  max-width: 900px;
-  margin: 30px auto;
-  background-color: white;
-  padding: 20px 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-h3 {
-  text-align: center;
-  color: #002b5c;
-}
-
-/* Tables */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background-color: #e5ecf5;
-}
-
-/* Forms */
-input[type="text"],
-input[type="number"],
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-textarea {
-  resize: vertical;
-  height: 80px;
-}
-
-button {
-  display: block;
-  width: 100%;
-  background-color: #002b5c;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #004b9a;
-}
-
-.footer {
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 20px;
-  background-color: #f0f0f0;
-  color: #333;
-  font-size: 14px;
-}
-
-.summary {
-  margin-top: 20px;
-  text-align: right;
-  font-weight: bold;
-}
-</style>
