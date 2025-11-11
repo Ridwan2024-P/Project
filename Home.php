@@ -1,3 +1,27 @@
+<?php
+// Database connection
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "login_system";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+if ($conn->connect_error) {
+  die("Database connection failed: " . $conn->connect_error);
+}
+
+// Fetch all scores
+$sql = "SELECT * FROM scores";
+$result = $conn->query($sql);
+
+// Calculate group average
+$avg_sql = "SELECT group_number, AVG(total_score) as avg_score FROM scores GROUP BY group_number";
+$avg_result = $conn->query($avg_sql);
+$averages = [];
+while ($row = $avg_result->fetch_assoc()) {
+  $averages[$row['group_number']] = round($row['avg_score'], 2);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +120,7 @@
 
   <main class="container">
     <h3>Judges' Submitted Scores</h3>
+
     <table>
       <thead>
         <tr>
@@ -106,23 +131,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Judge 1</td>
-          <td>1</td>
-          <td>52</td>
-          <td>Excellent teamwork</td>
-        </tr>
-        <tr>
-          <td>Judge 2</td>
-          <td>1</td>
-          <td>48</td>
-          <td>Good effort</td>
-        </tr>
+        <?php
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>{$row['judge_name']}</td>
+                    <td>{$row['group_number']}</td>
+                    <td>{$row['total_score']}</td>
+                    <td>{$row['comments']}</td>
+                  </tr>";
+          }
+        } else {
+          echo "<tr><td colspan='4'>No scores submitted yet.</td></tr>";
+        }
+        ?>
       </tbody>
     </table>
 
     <div class="summary">
-      <p><strong>Group Average:</strong> 50</p>
+      <?php
+      foreach ($averages as $group => $avg) {
+        echo "<p><strong>Group $group Average:</strong> $avg</p>";
+      }
+      ?>
     </div>
   </main>
 
@@ -132,3 +163,4 @@
 
 </body>
 </html>
+<?php $conn->close(); ?>
