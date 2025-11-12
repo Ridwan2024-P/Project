@@ -31,7 +31,7 @@ if (isset($_GET['email']) && isset($_GET['password']) && isset($_GET['type'])) {
       echo "
        <script>
         alert('Admin login successful!');
-        window.location.href = 'Home.php';
+        window.location.href = 'admin.php';
         </script>
        ";
        exit();
