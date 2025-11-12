@@ -104,11 +104,16 @@ th {background:#e5ecf5;}
 </style>
 </head>
 <body>
-<header class="header">
-<h2>Computer Science Project Evaluation</h2>
-</header>
-
+    
+ 
 <main class="container">
+    <div class="logout" style="display:flex;   justify-content:end; width:100%; margin-bottom:10px;">
+<form method="POST" action="logout.php" >
+<button type="submit">Logout</button>
+</form>
+</div>
+   
+
 <?php if($message != "") echo "<div>{$message}</div>"; ?>
 
 <form method="POST" action="">
@@ -180,10 +185,6 @@ if ($eval_result && $eval_result->num_rows > 0) {
 </tbody>
 </table>
 </main>
-
-<footer class="footer">
-<p>Judge Evaluation System © 2025</p>
-</footer>
 </body>
 </html>
 

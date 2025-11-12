@@ -117,7 +117,6 @@ form input, form textarea {margin:5px 0; padding:8px; width:250px; border-radius
 <body>
 <?php echo $message; ?>
 
-<header class="header"><h2>Administrator Dashboard</h2></header>
 <main class="container">
 <div class="logout">
 <form method="POST" action="logout.php" style="display:inline;">
@@ -242,9 +241,7 @@ if ($evaluations && $evaluations->num_rows > 0) {
 
 </main>
 
-<footer class="header" style="background:#f0f0f0; color:#333;">
-<p>© 2025 Judge Evaluation System</p>
-</footer>
+
 
 <script>
 function editJudge(data){
