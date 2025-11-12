@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    
+    background:#f1f1f3;
+     margin:0;
+      padding:0;
+    }
+
+#judge
+ {
+    width:90%;
+     max-width:900px;
+
+
+      margin:30px auto; 
+
+        background:white; 
+      padding:20px 30px; 
+
+
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+       border-radius:10px;
+    }
+
+input, textarea 
+{
+    
+    width:100%;
+     padding:8px;
+      margin:5px 0 15px;
+       border:1px solid #ccc; 
+       border-radius:6px;
+    
+    }
+button 
+{
+    display:block;
+     width:100%; 
+     background:#002b5c; 
+     color:white;
+      border:none;
+      padding:10px; 
+      border-radius:6px; 
+      
+      cursor:pointer;
+    }
+button:hover
+ {
+    background:#004b9a;
+
+}
+table 
+{width:100%;
+     border-collapse:collapse;
+      margin-top:20px;
+    }
+th, td 
+{
+    border:1px solid #ccc;
+     padding:10px;
+      text-align:center;
+    }
+th 
+{
+    
+    background:#e5ecf5;
+}
+
