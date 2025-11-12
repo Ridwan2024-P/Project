@@ -27,14 +27,26 @@ if (isset($_GET['email']) && isset($_GET['password']) && isset($_GET['type'])) {
              $_SESSION['email']= $row['email'];
             $_SESSION['type'] =$row['type'];
 
-           
-            if ($row['type'] == 'admin') 
-              {
-                $message = "<h3 style='color:green; text-align:center;'>Admin login successful!</h3>";
-             } 
+           if ($row['type'] == 'admin') {
+      echo "
+       <script>
+        alert('Admin login successful!');
+        window.location.href = 'Home.php';
+        </script>
+       ";
+       exit();
+}
+
+
             else 
               {
-                $message = "<h3 style='color:green; text-align:center;'>Judge login successful!</h3>";
+                 echo "
+       <script>
+        alert('Judge login successful!');
+        window.location.href = 'judge.php';
+        </script>
+       ";
+       exit();
             }
                 } 
         else
