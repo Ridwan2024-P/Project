@@ -68,6 +68,7 @@ $eval_result = $eval->getAllEvaluations();
     </div>
 
     <?php if($message != "") echo "<div>{$message}</div>"; ?>
+    <h2 style="text-align:center;">Computer Science Project</h2>
 
     <form method="POST" action="">
 
@@ -101,7 +102,7 @@ $criteria = ['Articulate requirements','Choose appropriate tools and methods', '
                 }
                 ?>
 
-                
+
             </tbody>
         </table>
 
