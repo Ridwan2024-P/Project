@@ -39,32 +39,39 @@ class User
 
 
     public function updateJudge($id, $name, $email, $password=null)
-    
+{
+    if(!empty($password))
     {
-        if(!empty($password))
-             {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $this->conn->prepare("UPDATE users SET name=?, email=?, password=? WHERE id=?");
-            $stmt->bind_param("sssi", $name, $email, $hashed_password, $id);
-        }
+       
+        
+        $stmt = $this->conn->prepare("UPDATE users SET name=?, email=?, password=? WHERE id=?");
 
-
-         else 
-            {
-
-            $stmt = $this->conn->prepare("UPDATE users SET name=?, email=? WHERE id=?");
-            $stmt->bind_param("ssi", $name, $email, $id);
-
-
-        }
+        $stmt->bind_param("sssi", $name, $email, $password, $id);
 
 
 
-        $stmt->execute();
-        $stmt->close();
 
-return "<script>alert('Judge Updated Successfully!');</script>";
+
+
     }
+    else 
+    {
+        $stmt = $this->conn->prepare("UPDATE users SET name=?, email=? WHERE id=?");
+        $stmt->bind_param("ssi", $name, $email, $id);
+
+
+
+
+
+
+
+    }
+$stmt->execute();
+    $stmt->close();
+
+    return "<script>alert('Judge Updated Successfully!');</script>";
+}
+
 
     public function getJudges() 
     {
