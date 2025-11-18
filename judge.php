@@ -88,22 +88,48 @@ $eval_result = $eval->getAllEvaluations();
                     <th>Accomplished (11–15)</th>
                 </tr>
 </thead>
- <tbody>
- <?php
-$criteria = ['Articulate requirements','Choose appropriate tools and methods', 'Give clear and coherent presentation', 'Functioned well as a team'];
-        $names = ['articulate','tools','presentation', 'teamwork'];
-                foreach($criteria as $i => $c)
-                    {
-                    echo "<tr>
-                        <td>{$c}</td>
-                        <td><input type='radio' name='{$names[$i]}' value='developing' required></td>
-                        <td><input type='radio' name='{$names[$i]}' value='accomplished'></td>
-                    </tr>";
-                }
-                ?>
+<tbody>
+<?php
+$criteria = [
+    'Articulate requirements',
+    'Choose appropriate tools and methods',
+    'Give clear and coherent presentation',
+    'Functioned well as a team'
+];
 
+$names = ['articulate','tools','presentation','teamwork'];
 
-            </tbody>
+foreach($criteria as $i => $c){
+    $name = $names[$i];
+    $dev_id = $name."_dev";
+    $acc_id = $name."_acc";
+
+    echo "
+    <tr>
+        <td>{$c}</td>
+
+        <td>
+            <input type='radio' name='{$name}_select' onclick=\"
+                document.getElementById('{$dev_id}').disabled=false;
+                document.getElementById('{$acc_id}').disabled=true;
+                document.getElementById('{$acc_id}').value='';
+            \">
+            <input type='number' name='{$name}' id='{$dev_id}' min='0' max='10' disabled required>
+        </td>
+
+        <td>
+            <input type='radio' name='{$name}_select' onclick=\"
+                document.getElementById('{$acc_id}').disabled=false;
+                document.getElementById('{$dev_id}').disabled=true;
+                document.getElementById('{$dev_id}').value='';
+            \">
+            <input type='number' name='{$name}' id='{$acc_id}' min='11' max='15' disabled required>
+        </td>
+    </tr>";
+}
+?>
+</tbody>
+
         </table>
 
         <label>Judge Name:</label>
