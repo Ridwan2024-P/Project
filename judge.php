@@ -131,6 +131,10 @@ foreach($criteria as $i => $c){
 </tbody>
 
         </table>
+        <style>input[type="number"] {
+    width: 60px;
+}
+</style>
 
         <label>Judge Name:</label>
         <input type="text" name="judge_name" required>
