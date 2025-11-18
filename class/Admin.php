@@ -10,40 +10,33 @@ class User
     }
 
     public function addJudge($name, $email, $password)
-     {
-        $stmt = $this->conn->prepare("SELECT id FROM users WHERE email=?");
+{
+    $stmt = $this->conn->prepare("SELECT id FROM users WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
 
-                $stmt->bind_param("s", $email);
-
-        $stmt->execute();
- $stmt->store_result();
-
-
-        if ($stmt->num_rows>0) 
-            
-            {
-            $stmt->close();
-            return "<script>alert('Judge with this email already exists!');</script>";
-        }
-
-
+    if ($stmt->num_rows > 0) {
         $stmt->close();
-
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-
- $stmt = $this->conn->prepare("INSERT INTO users (name,email,password,type) VALUES (?,?,?,'judge')");
-
-
-        $stmt->bind_param("sss", $name, $email, $hashed_password);
-
-
-             $stmt->execute();
-        $stmt->close();
-
-
-        return "<script>alert('Judge Added Successfully!');</script>";
+        return "<script>alert('Judge with this email already exists!');</script>";
     }
+
+    $stmt->close();
+
+  
+   
+    $stmt = $this->conn->prepare("INSERT INTO users (name,email,password,type) VALUES (?,?,?,'judge')");
+
+    $stmt->bind_param("sss", $name, $email, $password);
+
+    $stmt->execute();
+
+    
+    $stmt->close();
+
+    return "<script>alert('Judge Added Successfully!');</script>";
+}
+
 
     public function updateJudge($id, $name, $email, $password=null)
     
