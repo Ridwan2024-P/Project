@@ -68,7 +68,7 @@ $eval_result = $eval->getAllEvaluations();
     </div>
 
     <?php if($message != "") echo "<div>{$message}</div>"; ?>
-    <h2 style="text-align:center;">Computer Science Project</h2>
+    <h2 style="text-align:center;color: #00074f; font-size:35px;">Computer Science Project</h2>
 
     <form method="POST" action="">
 
@@ -101,8 +101,9 @@ $names = ['articulate','tools','presentation','teamwork'];
 
 foreach($criteria as $i => $c){
     $name = $names[$i];
-    $dev_id = $name."_dev";
-    $acc_id = $name."_acc";
+
+    $dev_id = $name . "_dev";
+    $acc_id = $name . "_acc";
 
     echo "
     <tr>
@@ -110,24 +111,39 @@ foreach($criteria as $i => $c){
 
         <td>
             <input type='radio' name='{$name}_select' onclick=\"
-                document.getElementById('{$dev_id}').disabled=false;
-                document.getElementById('{$acc_id}').disabled=true;
+                document.getElementById('{$dev_id}').style.display='block';
+                document.getElementById('{$acc_id}').style.display='none';
                 document.getElementById('{$acc_id}').value='';
             \">
-            <input type='number' name='{$name}' id='{$dev_id}' min='0' max='10' disabled required>
+
+            <input type='number'
+                   name='{$name}_dev'
+                   id='{$dev_id}'
+                   min='0'
+                   max='10'
+                   style='display:none; margin-top:8px; width:90%;'
+                   required>
         </td>
 
         <td>
             <input type='radio' name='{$name}_select' onclick=\"
-                document.getElementById('{$acc_id}').disabled=false;
-                document.getElementById('{$dev_id}').disabled=true;
+                document.getElementById('{$acc_id}').style.display='block';
+                document.getElementById('{$dev_id}').style.display='none';
                 document.getElementById('{$dev_id}').value='';
             \">
-            <input type='number' name='{$name}' id='{$acc_id}' min='11' max='15' disabled required>
+
+            <input type='number'
+                   name='{$name}_acc'
+                   id='{$acc_id}'
+                   min='11'
+                   max='15'
+                   style='display:none; margin-top:8px;width:90%;'
+                   required>
         </td>
     </tr>";
 }
 ?>
+
 </tbody>
 
         </table>
