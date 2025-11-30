@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
@@ -186,9 +188,13 @@ if ($eval_result && $eval_result->num_rows > 0) {
         </tr>";
     }
 } 
-else {
+else
+     {
     echo "<tr><td colspan='6'>No evaluations yet.</td></tr>";
 }
+
+
+
 ?>
 
         </tbody>

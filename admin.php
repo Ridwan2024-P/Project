@@ -139,7 +139,7 @@ if($judges && $judges->num_rows>0)
             <td>{$row['id']}</td>
             <td>{$row['name']}</td>
             <td>{$row['email']}</td>
-            <td>{$row['password']}</td>
+            <td>********</td>
             <td><button class='edit-btn' onclick='editJudge(".json_encode($row).")'>Edit</button></td>
         </tr>";
 
