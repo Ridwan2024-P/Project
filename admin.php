@@ -238,6 +238,19 @@ $evals  = $eval->getAllEvals();
 </div>
 <div style="width:100%; max-width:1500px; height:450px; background:#fff; align:center; margin:0 auto; padding-top:20px;border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
   <h3 style="text-align:center;">All Judge Evaluations</h3>
+  <table style="gap:5px; width:85%; text-align:center; background:#f9f9f9; border-collapse: collapse; margin:0 0 0px 86px;">
+    <thead>
+      <tr >
+       
+        <th>Judge One</th>
+        <th>Judge Two</th>
+        <th>Judge Three</th>  
+        <th>Judge Four</th>
+      
+      </tr>
+    </thead>
+</table>
+    
   <table style="margin:0 auto 50px auto; width:80%; text-align:center; background:#f9f9f9;">
     <thead>
       <tr>

@@ -196,6 +196,18 @@ foreach ($criteria as $i => $c) {
 </div>
 
 <h3 style="text-align:center;color:#00074f;font-size:30px;">Submitted Evaluations</h3>
+ <table style="gap:5px; width:64.9%; text-align:center; background:#f9f9f9; border-collapse: collapse; margin:0 0px 0px 197px;">
+    <thead>
+      <tr >
+       
+        <th>Judge One</th>
+        <th>Judge Two</th>
+        <th>Judge Three</th>  
+        <th>Judge Four</th>
+      
+      </tr>
+    </thead>
+</table>
 <table style="margin-bottom:50px;">
   <thead>
     <tr>
@@ -230,12 +242,15 @@ if ($eval_result && $eval_result->num_rows > 0) {
 
 foreach ($grouped as $group_number => $evaluations) {
     echo "<tr>";
-    echo "<td>{$group_number}</td>";
+    echo "<td>" . htmlspecialchars($group_number) . "</td>";
 
     $judge_count = 0;
     $total_sum = 0;
 
     foreach ($evaluations as $row) {
+    
+        if ($judge_count >= 4) break; 
+        
         echo "<td>" . htmlspecialchars($row['judge_name']) . "</td>";
         echo "<td>" . htmlspecialchars($row['total']) . "</td>";
         echo "<td>" . htmlspecialchars($row['comments']) . "</td>";
@@ -264,10 +279,9 @@ foreach ($grouped as $group_number => $evaluations) {
     echo "<td>{$avg_val}</td>";
     echo "<td>{$avg_grade}</td>";
 
-    $submitted_at = end($evaluations)['created_at'];
+    $submitted_at = !empty($evaluations) ? end($evaluations)['created_at'] : '-';
     echo "<td>{$submitted_at}</td>";
 
-   
     $alreadyMarked = false;
     foreach ($evaluations as $evalEntry) {
         if ($evalEntry['judge_name'] === $_SESSION['judge_name']) {
@@ -275,7 +289,9 @@ foreach ($grouped as $group_number => $evaluations) {
             break;
         }
     }
-    if (!$alreadyMarked) {
+
+   
+    if (!$alreadyMarked && $judge_count < 4) { 
         echo "<td><a href='judge.php?group={$group_number}' class='btn'>Edit</a></td>";
     } else {
         echo "<td>-</td>";
@@ -284,9 +300,8 @@ foreach ($grouped as $group_number => $evaluations) {
     echo "</tr>";
 }
 
-
-
 ?>
+
   </tbody>
 </table>
 
