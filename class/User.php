@@ -1,92 +1,101 @@
 <?php
 class User {
-    private $conn;
-    public function __construct($db)
-     {
-        $this->conn=$db->getConnection();
-    }
+private $conn;
 
-    public function login($email, $password, $type)
-    {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email=? AND type=?");
-        $stmt->bind_param("ss", $email, $type);
- $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+public function __construct($db) {
+    $this->conn = $db->getConnection();
+}
 
+public function login($email, $password, $type)
+
+{
+    $stmt = $this->conn->prepare("SELECT * FROM users WHERE email=? AND type=?");
+
+
+    $stmt->bind_param("ss", $email, $type);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+        
+
+
+        if (password_verify($password, $row['password']))
             
-            if (password_verify($password, $row['password'])) {
-                session_start();
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['type'] = $row['type'];
+            {
+            session_start();
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['type'] = $row['type'];
+            $_SESSION['judge_name'] = $row['name'];
 
-                if ($row['type'] == "admin") 
-                    
-                    {
-                    header("Location: admin.php");
-                    exit();
-                } 
-                
-                
-                else
-                    
-                    {
-                    header("Location: judge.php");
-                    exit();
-                }
-
-            }
-            
-            
-            
-            else 
-                
-                
-                {
-                return "<h3 style='color:red; text-align:center;'>Wrong password!</h3>";
+            if ($row['type'] == "admin") {
+                header("Location:admin.php");
+                exit();
+            } else {
+                header("Location:judge.php");
+                exit();
             }
 
         }
         
         
-        else
+        else 
+            
+            
+            {
+            return "<h3 style='color:red; text-align:center;'>Wrong password!</h3>";
+        }
+    } 
+    
+    
+    else
         
         {
-            return "<h3 style='color:red; text-align:center;'>No user found</h3>";
-        }
-
-
-
-        $stmt->close();
-
-
-
-
-
-
-
-
+        return "<h3 style='color:red; text-align:center;'>No user found</h3>";
     }
 
 
 
 
 
+    $stmt->close();
 
 
 
 
 
 
+}
+
+public function register($name, $email, $password, $type) 
 
 
 
-
+{
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $this->conn->prepare("INSERT INTO users (name, email, password, type) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $email, $hashedPassword, $type);
 
 
 
     
+    $stmt->execute();
+    $stmt->close();
+
+
+
+
+
+
+
 }
+
+
+}
+?>
