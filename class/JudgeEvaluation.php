@@ -83,4 +83,34 @@ class JudgeEvaluation {
             return ['success' => false, 'error' => $stmt->error];
         }
     }
+
+
+
+
+
+public function groupExists($group_number) {
+    $sql = "SELECT id FROM evaluations WHERE group_number = ?";
+    $stmt = $this->conn->prepare($sql);   
+    $stmt->bind_param("s", $group_number);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->num_rows > 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 }

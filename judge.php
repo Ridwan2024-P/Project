@@ -30,6 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         'teamwork' => ($_POST['teamwork_dev'] !== "" ? $_POST['teamwork_dev'] : ($_POST['teamwork_acc'] ?? 0)),
         'comments' => $_POST['comments'] ?? '',
     ];
+if ($eval->groupExists($_POST['group_number'])) 
+    {
+    echo "<script>
+            alert('This group already exists!');
+            window.location.href = 'judge.php';
+          </script>";
+    exit;
+}
+
+
 
     $result = $eval->submitOrUpdateEvaluation($data);
 
@@ -50,6 +60,8 @@ if (isset($_GET['group'])) {
     $edit_eval = $eval->getEvaluation($group_number, $_SESSION['judge_name']);
     $groupInfo = $eval->getGroupInfo($group_number);
 }
+
+
 
 
 $eval_result = $eval->getAllEvaluations();
