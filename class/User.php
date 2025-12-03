@@ -33,6 +33,8 @@ public function login($email, $password, $type)
             $_SESSION['email'] = $row['email'];
             $_SESSION['type'] = $row['type'];
             $_SESSION['judge_name'] = $row['name'];
+           
+            
 
             if ($row['type'] == "admin") {
                 header("Location:admin.php");

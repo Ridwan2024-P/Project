@@ -1,10 +1,13 @@
 <?php
 session_start();
+session_regenerate_id(true);
+//$_SESSION = [];
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['type'] !== 'judge') {
     header("Location: index.php");
-    exit;
+    exit();
 }
+///$_SESSION['judge_email'];
 
 require_once "class/Database.php";
 require_once "class/JudgeEvaluation.php";
@@ -13,6 +16,20 @@ $db = new Database();
 $eval = new JudgeEvaluation($db);
 
 $message = "";
+$judgeEmail = '';
+
+if (isset($_SESSION['user_id'])) {
+    // adjust this part based on how your Database class exposes the connection
+    $conn = $db->getConnection(); // or $db->conn
+
+    $stmt = $conn->prepare("SELECT email FROM users WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $stmt->bind_result($judgeEmail);
+    $stmt->fetch();
+    $stmt->close();
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST")
     
@@ -106,11 +123,49 @@ th,td {
 <body>
 
 <div id="judge">
+    <!--
     <div class="logout" style="display:flex; justify-content:end; margin-bottom:10px;">
         <form method="POST" action="logout.php">
             <button type="submit">Logout</button>
+              <button><strong><?php echo htmlspecialchars($_SESSION['judge_name']); ?></strong></button>
         </form>
+      
     </div>
+	-->
+            <div style="display:flex; justify-content:flex-end; padding:16px 20px; box-sizing:border-box;">
+            <div style="
+                display:flex;
+                align-items:center;
+                gap:10px;
+                background:#f5f7fb;
+                padding:8px 14px;
+                border-radius:999px;
+                box-shadow:0 2px 6px rgba(15,23,42,0.12);
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                font-size:14px;
+                color:#0f172a;
+            ">
+                <span style="font-weight:600;">
+                    <?php echo htmlspecialchars($judgeEmail); ?>
+                </span>
+
+                <form method="POST" action="logout.php" style="margin:0; display:inline-block;">
+                    <button type="submit" style="
+                        border:none;
+                        padding:6px 14px;
+                        border-radius:999px;
+                        background:#0b3b73;
+                        color:#ffffff;
+                        font-size:13px;
+                        font-weight:600;
+                        cursor:pointer;
+                        letter-spacing:0.3px;
+                    ">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
 
     <?php if ($message != "") echo "<div>{$message}</div>"; ?>
 
@@ -196,6 +251,7 @@ foreach ($criteria as $i => $c) {
 </div>
 
 <h3 style="text-align:center;color:#00074f;font-size:30px;">Submitted Evaluations</h3>
+    <h2 style="text-align:center;color:#00074f;font-size:30px;">Grade the group's if not graded</h2>
  <table style="gap:5px; width:64.9%; text-align:center; background:#f9f9f9; border-collapse: collapse; margin:0 0px 0px 197px;">
     <thead>
       <tr >
@@ -224,8 +280,8 @@ foreach ($criteria as $i => $c) {
       <th>Judge Four</th>
       <th>Total</th>
       <th>Comments</th>
-      <th>Average</th>
-      <th>Average Grades</th>
+      <!-- <th>Average</th>
+      <th>Average Grades</th> -->
       <th>Submitted At</th>
       <th>Action</th>
     </tr>
@@ -252,7 +308,8 @@ foreach ($grouped as $group_number => $evaluations) {
         if ($judge_count >= 4) break; 
         
         echo "<td>" . htmlspecialchars($row['judge_name']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['total']) . "</td>";
+        //echo "<td>" . htmlspecialchars($row['total']) . "</td>";
+        echo "<td>**</td>";
         echo "<td>" . htmlspecialchars($row['comments']) . "</td>";
         $total_sum += $row['total'];
         $judge_count++;
@@ -262,23 +319,47 @@ foreach ($grouped as $group_number => $evaluations) {
         echo "<td>-</td><td>-</td><td>-</td>";
     }
 
+    /*
     $avg_val = $judge_count ? round($total_sum / $judge_count, 2) : '-';
 
     if ($avg_val === '-') {
         $avg_grade = '-';
-    } elseif ($avg_val >= 45) {
+    } elseif ($avg_val >= 55.8) {
         $avg_grade = 'A';
-    } elseif ($avg_val >= 35) {
+    } elseif ($avg_val >= 54) {
+        $avg_grade = 'A-';
+    } elseif ($avg_val >= 52.2) {
+        $avg_grade = 'B+';
+    } elseif ($avg_val >= 49.8) {
         $avg_grade = 'B';
-    } elseif ($avg_val >= 25) {
+ } elseif ($avg_val >= 48) {
+        $avg_grade = 'B-';
+}
+        elseif ($avg_val >= 46.2) {
+        $avg_grade = 'C+';
+}
+        elseif ($avg_val >= 43.8) {
         $avg_grade = 'C';
-    } else {
-        $avg_grade = 'D';
+}
+        elseif ($avg_val >= 42) {
+        $avg_grade = 'C-';
+}  
+        elseif ($avg_val >= 40.2) {
+        $avg_grade = 'D+';
+}
+        elseif ($avg_val >= 37.8) {
+        $avg_grade = 'D';}
+        elseif ($avg_val >= 36) {
+        $avg_grade = 'D-';
+
+        else {
+        $avg_grade = 'f';
     }
 
     echo "<td>{$avg_val}</td>";
     echo "<td>{$avg_grade}</td>";
 
+	*/
     $submitted_at = !empty($evaluations) ? end($evaluations)['created_at'] : '-';
     echo "<td>{$submitted_at}</td>";
 
@@ -292,7 +373,7 @@ foreach ($grouped as $group_number => $evaluations) {
 
    
     if (!$alreadyMarked && $judge_count < 4) { 
-        echo "<td><a href='judge.php?group={$group_number}' class='btn'>Edit</a></td>";
+        echo "<td><a href='judge.php?group={$group_number}' class='btn'>Grade</a></td>";
     } else {
         echo "<td>-</td>";
     }
